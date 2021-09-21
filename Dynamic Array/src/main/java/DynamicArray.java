@@ -77,7 +77,7 @@ public class DynamicArray<T> {
             }
         }else{
             for(int i = 0; i < numOfElements-1; i++){
-                if(index >= i) newArr[i] = arr[i+1];
+                if(i >= index) newArr[i] = arr[i+1];
             }
         }
         arr = newArr;
