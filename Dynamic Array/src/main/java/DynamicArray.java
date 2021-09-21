@@ -52,6 +52,7 @@ public class DynamicArray<T> {
 
     //add element to a particular index in the list
     public void addAtIndex(int index, T elem){
+        if(index < 0 ) throw new IndexOutOfBoundsException();
         ensureCapacity(); //check if there is capacity to add this element
         T[] newArr = (T[]) new Object[capacity];
         for(int i = 0; i < numOfElements; i++){
@@ -66,8 +67,27 @@ public class DynamicArray<T> {
         numOfElements++;
     }
 
+    //Removes element at particular index
+    public void removeAtIndex(int index){
+        if(index >= numOfElements || index < 0) throw new IndexOutOfBoundsException();
+        T[] newArr = (T[]) new Object[capacity];
+        if(index == (numOfElements-1)){ //if last element
+            for(int i = 0; i < numOfElements-1; i++){
+                newArr[i] = arr[i];
+            }
+        }else{
+            for(int i = 0; i < numOfElements-1; i++){
+                if(index >= i) newArr[i] = arr[i+1];
+            }
+        }
+        arr = newArr;
+        numOfElements--;
+    }
 
-
-
-
+    //remove first occurrence of an element if found
+    public void remove(T elem){
+        for(int i = 0; i < numOfElements; i++){
+            if(arr[i] == elem) removeAtIndex(i);
+        }
+    }
 }
