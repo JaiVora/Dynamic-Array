@@ -34,6 +34,12 @@ public class DynamicArray<T> {
 
     //appends an element to the list
     public void add(T elem){
+        ensureCapacity();
+        arr[numOfElements++] = elem;
+    }
+
+    //ensures that sufficient space is available in the list
+    private void ensureCapacity(){
         if(numOfElements >= capacity){
             capacity *= 2;
             T[] newArr = (T[])new Object[capacity];
@@ -42,7 +48,22 @@ public class DynamicArray<T> {
             }
             arr = newArr;
         }
-        arr[numOfElements++] = elem;
+    }
+
+    //add element to a particular index in the list
+    public void addAtIndex(int index, T elem){
+        ensureCapacity(); //check if there is capacity to add this element
+        T[] newArr = (T[]) new Object[capacity];
+        for(int i = 0; i < numOfElements; i++){
+            if(i >= index){
+                newArr[i+1] = arr[i];
+            }else{
+                newArr[i] = arr[i];
+            }
+        }
+        arr = newArr;
+        arr[index] = elem;
+        numOfElements++;
     }
 
 
