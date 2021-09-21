@@ -32,9 +32,17 @@ public class DynamicArray<T> {
         return numOfElements == 0;
     }
 
-    //append
-    public void add(){
-
+    //appends an element to the list
+    public void add(T elem){
+        if(numOfElements >= capacity){
+            capacity *= 2;
+            T[] newArr = (T[])new Object[capacity];
+            for(int i = 0; i < numOfElements; i++){
+                newArr[i] = arr[i];
+            }
+            arr = newArr;
+        }
+        arr[numOfElements++] = elem;
     }
 
 
