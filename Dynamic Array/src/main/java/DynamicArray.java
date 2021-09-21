@@ -14,8 +14,8 @@ public class DynamicArray<T> {
     public DynamicArray(int capacity){
         if(capacity <= 0) throw new IllegalArgumentException("Capacity should be greater than 0");
         this.capacity = capacity;
-        numOfElements = 0;
-        T[] arr = (T[]) new Object[capacity];
+        this.numOfElements = 0;
+        this.arr = (T[]) new Object[capacity];
     }
 
     public DynamicArray(){
@@ -89,5 +89,10 @@ public class DynamicArray<T> {
         for(int i = 0; i < numOfElements; i++){
             if(arr[i] == elem) removeAtIndex(i);
         }
+    }
+
+    public T get(int index){
+        if(index < 0 || index >= numOfElements) throw new IndexOutOfBoundsException();
+        return arr[index];
     }
 }
